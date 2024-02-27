@@ -1,18 +1,19 @@
-﻿<%@ Page Title="Contact" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.vb" Inherits="FaconV2.Contact" %>
+﻿<%@ Page Title="Contatto" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.vb" Inherits="FaconV2.Contact" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <h2><%: Title %></h2>
-    <p>Your contact page.</p>
+    <%--<h2><%: Title %></h2>--%>
+    <h2>Facon V2</h2>
 
     <address>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br />
-        <abbr title="Phone">P:</abbr>
-        425.555.0100
+        Maglificio Gran Sasso spa <br />
+        Via Isaac Newton, 2<br />
+        64016 Sant'Egidio alla Vibrata (TE)<br />
+        <abbr title="Phone">T:</abbr>
+        08618460
     </address>
 
     <address>
-        <strong>Support:</strong><a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong><a href="mailto:Marketing@example.com">Marketing@example.com</a>
+        <strong>Assistenza:</strong><a href="mailto:robert.botis@gransasso.it">robert.botis@gransasso.it</a><br />
+        
     </address>
 </asp:Content>

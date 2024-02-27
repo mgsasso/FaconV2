@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Home Page" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.vb" Inherits="FaconV2._Default" %>
+﻿<%@ Page Title="Facon V2" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.vb" Inherits="FaconV2._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -6,6 +6,8 @@
         <h1>&nbsp;</h1>
     </div>--%>
     <link href="Content/bootstrap.css" rel="stylesheet" />
+
+
 <%--    <div class="row">
         <div class="col-md-4">
             <h2>&nbsp;</h2>
@@ -41,17 +43,26 @@
        </div>
        </div>
     <div class="form-group">
+<%--    <div class="row">--%>
         <br />
        <br />
        <asp:Label runat="server" AssociatedControlID="AspettoBeni" CssClass="col-md-2 control-label">Aspetto dei beni</asp:Label>
        <div class="col-md-3">
-           <asp:DropDownList ID="AspettoBeni" runat="server" CssClass="form-control" onfocus="disableautocompletion(this.id);">
+           <asp:DropDownList ID="AspettoBeni" runat="server" CssClass="form-control" onfocus="disableautocompletion(this.id);" Width="190px">
                <asp:ListItem>carrelli e scatoloni</asp:ListItem>
                <asp:ListItem>carrelli</asp:ListItem>
                <asp:ListItem>scatoloni</asp:ListItem>
            </asp:DropDownList>
        </div>
-   </div>
+       <asp:Label runat="server" AssociatedControlID="AspettoBeni" CssClass="col-md-2 control-label">Trasporto a cura</asp:Label>
+       <div class="col-md-3">
+           <asp:DropDownList ID="TrasportoACura" runat="server" CssClass="form-control" onfocus="disableautocompletion(this.id);">
+               <asp:ListItem>destinatario</asp:ListItem>
+               <asp:ListItem>mittente</asp:ListItem>
+           </asp:DropDownList>
+       </div>
+ <%--  </div>--%>
+  </div>
     <div class="form-group">
         <br />
        <br />
@@ -76,7 +87,7 @@
     <br />
     <br />
     <br />
-    <asp:Button ID="Button1" runat="server" Text="STAMPA BOLLA" Width="206px" CssClass="btn btn-default" BackColor="Silver"  AutoPostBack="true"/><br />
+    <asp:Button ID="Button1" runat="server" Text="STAMPA BOLLA" Width="206px" CssClass="btn btn-default" BackColor="Silver"  AutoPostBack="true"/><br OnClientClick="aspnetForm.target ='_blank';"/>
         <br />
         <asp:Label ID="Label1" runat="server" ForeColor="Red" Text="Label" Visible="False"></asp:Label>
         
@@ -91,8 +102,9 @@
   <div class="col-lg-6">
     <%--<div class="col-md-3">--%>
 <%--     <asp:Label runat="server" AssociatedControlID="SearchTxt" Class="col-md-2 control-label">Ricerca</asp:Label>--%>
-        <asp:TextBox ID="SearchTxt" runat="server" placeholder="Ricerca...." CssClass="form-control" OnTextChanged ="SearchGv" AutoPostBack="true" onfocus="disableautocompletion(this.id);" Width="300px" ></asp:TextBox>
-<%--    </div>--%>
+        <asp:TextBox ID="SearchTxt" runat="server"  Visible="False" placeholder="Ricerca...." CssClass="form-control" onkeyup="filter2(this, '<%=GridView1.ClientID %>')" OnTextChanged="SearchGv" AutoPostBack="true" onfocus="disableautocompletion(this.id);" Width="214px"  ></asp:TextBox>
+        <input name="TextBox3" type="text" placeholder="Ricerca...." Class="form-control" onkeyup="filter2(this, '<%=GridView1.ClientID %>')" style="Width:150px" autocomplete ="off" >
+        <asp:HyperLink ID="HplUrlPdf" runat="server" Visible="False" Target="_blank">HyperLink</asp:HyperLink>
  </div>
 
    <div class="col-lg-4">
@@ -101,40 +113,37 @@
         <asp:TextBox ID="Selezionati" runat="server"  CssClass="form-control" onfocus="disableautocompletion(this.id);" Width="50px" ReadOnly="True" >0</asp:TextBox>
 <%--    </div>--%>
  </div>
+
+
  </div>
 
+     <br />
+     <br />
+     <br />
+    <div class="row">
+     <div class="col-lg-6">
+       <%--<asp:Label ID="LblFlagDaRientrare" runat="server" Text="Visualizza solo raggruppamenti da rientrare" Font-Bold="True"></asp:Label>--%>
+      <div class="btn-group" role="group" aria-label="...">
+      <asp:Button ID="BtnOn" runat="server" Class= "btn btn-success"  Text="da bollettare" width="100"/>
+      <asp:Button ID="BtnOff" runat="server" Class= "btn btn-default"  Text="bollettati" width="100"/>
+      </div>
+      </div>
+    </div>
 
-
-<%--    <div class="row">
-  <div class="col-lg-6">
-    <div class="input-group">
-      <span class="input-group-btn">
-        <button class="btn btn-default" ID="SearchTxt2" runat="server" type="button" OnTextChanged ="SearchGv">Go!</button>
-      </span>
-      <input type="text" class="form-control" placeholder="Search for...">
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-  <div class="col-lg-6">
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search for...">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->--%>
 
 
      <div >
 
     <div >
     <br />
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table table-hover"  AllowPaging="True" AllowSorting="True" DataKeyNames="ID,QT,PrezzoUnitario" EnablePersistedSelection="True" PageSize="50" DataSourceID="SqlDataSource1" >
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Class="table table-hover table-responsive"  AllowPaging="False" DataKeyNames="ID,QT,PrezzoUnitario" EnablePersistedSelection="True" PageSize="10" DataSourceID="SqlDataSource1" >
              <Columns>
 
                 <asp:BoundField DataField="ID" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="ID" />
-             
-                 <asp:TemplateField HeaderText="ArticoloCliente" SortExpression="ArticoloCliente">
+                <asp:BoundField DataField="ArticoloCliente" HeaderText="Articolo" InsertVisible="False" ReadOnly="True" SortExpression="ArticoloCliente" />
+                <asp:BoundField DataField="DescrizioneArticoloCliente" HeaderText="Descrizione" InsertVisible="False" ReadOnly="True" SortExpression="DescrizioneArticoloCliente" />
+                <asp:BoundField DataField="CommessaCliente" HeaderText="Commessa" InsertVisible="False" ReadOnly="True" SortExpression="CommessaCliente" />
+ <%--                <asp:TemplateField HeaderText="ArticoloCliente" SortExpression="ArticoloCliente">
           
                      <EditItemTemplate>
                          <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("ArticoloCliente") %>' Width="150px" ReadOnly="true"></asp:TextBox>
@@ -142,24 +151,24 @@
                      <ItemTemplate>
                          <asp:Label ID="Label3" runat="server" Text='<%# Bind("ArticoloCliente") %>'></asp:Label>
                      </ItemTemplate>
-                 </asp:TemplateField>
-                 <asp:TemplateField HeaderText="DescrizioneArticoloCliente" SortExpression="DescrizioneArticoloCliente">
+                 </asp:TemplateField>--%>
+<%--                 <asp:TemplateField HeaderText="DescrizioneArticoloCliente" SortExpression="DescrizioneArticoloCliente">
                      <EditItemTemplate>
                          <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("DescrizioneArticoloCliente") %>' Width="200px" ReadOnly="true"></asp:TextBox>
                      </EditItemTemplate>
                      <ItemTemplate>
                          <asp:Label ID="Label4" runat="server" Text='<%# Bind("DescrizioneArticoloCliente") %>'></asp:Label>
                      </ItemTemplate>
-                 </asp:TemplateField>
-                 <asp:TemplateField HeaderText="CommessaCliente" SortExpression="CommessaCliente">
+                 </asp:TemplateField>--%>
+<%--                 <asp:TemplateField HeaderText="CommessaCliente" SortExpression="CommessaCliente">
                      <EditItemTemplate>
                          <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("CommessaCliente") %>' Width="50px" ReadOnly="true"></asp:TextBox>
                      </EditItemTemplate>
                      <ItemTemplate>
                          <asp:Label ID="Label5" runat="server" Text='<%# Bind("CommessaCliente") %>'></asp:Label>
                      </ItemTemplate>
-                 </asp:TemplateField>
-                 <asp:TemplateField HeaderText="DataBollaCliente" SortExpression="DataBollaCliente">
+                 </asp:TemplateField>--%>
+                 <asp:TemplateField HeaderText="Data Bolla" SortExpression="DataBollaCliente">
                      <EditItemTemplate>
                          <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("DataBollaCliente") %>' Width="80px" ReadOnly="true"></asp:TextBox>
                      </EditItemTemplate>
@@ -167,7 +176,7 @@
                          <asp:Label ID="Label6" runat="server" Text='<%# Bind("DataBollaCliente") %>'></asp:Label>
                      </ItemTemplate>
                  </asp:TemplateField>
-                 <asp:TemplateField HeaderText="NumeroBollaCliente" SortExpression="NumeroBollaCliente">
+                 <asp:TemplateField HeaderText="Numero Bolla" SortExpression="NumeroBollaCliente">
                      <EditItemTemplate>
                          <asp:TextBox ID="TextBox7" runat="server" Text='<%# Bind("NumeroBollaCliente") %>' Width="70px" ReadOnly="true"></asp:TextBox>
                      </EditItemTemplate>
@@ -183,7 +192,7 @@
                          <asp:Label ID="Label2" runat="server" Text='<%# Bind("QT") %>'></asp:Label>
                      </ItemTemplate>
                  </asp:TemplateField>
-                 <asp:TemplateField HeaderText="PrezzoUnitario" SortExpression="PrezzoUnitario">
+                 <asp:TemplateField HeaderText="Prezzo Unitario" SortExpression="PrezzoUnitario">
                      <EditItemTemplate>
                          <asp:TextBox ID="TextBox8" runat="server" Text='<%# Bind("PrezzoUnitario") %>'  Width="60px" ReadOnly="true"></asp:TextBox>
                      </EditItemTemplate>
@@ -199,32 +208,37 @@
                          <asp:Label ID="Label1" runat="server" Text='<%# Bind("Note") %>'></asp:Label>
                      </ItemTemplate>
                  </asp:TemplateField>
-                 <asp:TemplateField HeaderText="Parziale" SortExpression="FlagInvioTemporaneo">
+<%--                 <asp:TemplateField HeaderText="Parziale" SortExpression="FlagInvioTemporaneo">
                      <EditItemTemplate>
                          <asp:TextBox ID="TextBox9" runat="server" Text='<%# Bind("FlagInvioTemporaneo") %>' Width="20px"></asp:TextBox>
                      </EditItemTemplate>
                      <ItemTemplate>
                          <asp:Label ID="Label9" runat="server" Text='<%# Bind("FlagInvioTemporaneo") %>'></asp:Label>
                      </ItemTemplate>
-                 </asp:TemplateField>
-                 <asp:CommandField ButtonType="Button" ShowEditButton="True" ShowSelectButton="True" CausesValidation="False">
+                 </asp:TemplateField>--%>
+                 <asp:BoundField DataField="FlagInvioTemporaneo" HeaderText="Parziale" InsertVisible="False" ReadOnly="True"/>
+                  <asp:BoundField DataField="CodiceOperazione" HeaderText="Operazione" InsertVisible="False" ReadOnly="True"/>
+                 <asp:CommandField ButtonType="Button" ShowEditButton="True" CausesValidation="False" ControlStyle-Width="80">
                  <ControlStyle CssClass="btn btn-default" />
                  </asp:CommandField>
                  <asp:BoundField DataField="FlagOrdinamento" HeaderText="FlagOrdinamento" SortExpression="FlagOrdinamento" Visible="False" />
-            </Columns>
+                 <asp:ButtonField ButtonType="Button" CommandName="Lavorato" HeaderText="Lavorato" Text="Seleziona" ControlStyle-Width="80">
+                 <ControlStyle CssClass="btn btn-default" />
+                 </asp:ButtonField>
+                 <asp:ButtonField ButtonType="Button" HeaderText="Non lavorato" Text="Seleziona" CommandName="NonLavorato" ControlStyle-Width="80">
+                 <ControlStyle CssClass="btn btn-default" />
+                 </asp:ButtonField>
+                 <asp:ButtonField CommandName="Visualizza" HeaderText="Doc lavorazione" Text="Visualizza" /> 
+                 <asp:ButtonField ButtonType="Button" Visible="false" CommandName ="ModificaParzialiTotali" HeaderText="Inverti parz/comp" Text="Inverti" ControlStyle-Width="80" > <ControlStyle CssClass="btn btn-primary" /> </asp:ButtonField>
+                 <asp:ButtonField ButtonType="Button" Visible="false" CommandName ="EliminaRiga" HeaderText="Elimina" Text="Elimina" ControlStyle-Width="80" > <ControlStyle CssClass="btn btn-primary" /> </asp:ButtonField>
 
+             </Columns>
 
-
-            
-
-             <PagerStyle CssClass=".pagination-sm" />
-
-
-
-            
+                <PagerStyle BorderStyle="Solid" Font-Size="Large" Font-Strikeout="False" Height="50" cssClass="pagination-ys"/>
+ 
 
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:FaconConnectionString %>" SelectCommand="SELECT ID, ArticoloCliente, DescrizioneArticoloCliente, CommessaCliente, Format(CAST(LEFT (DataBollaCliente, 4) + '-' + SUBSTRING(CAST(DataBollaCliente AS varchar(8)), 5, 2) + '-' + RIGHT (DataBollaCliente, 2) AS date), 'dd/MM/yyyy') AS DataBollaCliente, NumeroBollaCliente, QT, PrezzoUnitario, Note, FlagInvioTemporaneo, FlagSelezionato FROM TblDDTInviati WHERE (IDDDT IS NULL) AND (CodiceFornitore = @CODICEFORNITORE) ORDER BY FlagSelezionato DESC, ID DESC" UpdateCommand="Update Facon.dbo.TblDDTInviati set QT = 0 where ID = 0">
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:FaconConnectionString %>" SelectCommand="SELECT ID, ArticoloCliente, DescrizioneArticoloCliente, CommessaCliente, Format(CAST(LEFT (DataBollaCliente, 4) + '-' + SUBSTRING(CAST(DataBollaCliente AS varchar(8)), 5, 2) + '-' + RIGHT (DataBollaCliente, 2) AS date), 'dd/MM/yyyy') AS DataBollaCliente, NumeroBollaCliente, QT, PrezzoUnitario, Note, FlagInvioTemporaneo, FlagSelezionato, TipoProdotto + '-' + cast(CodiceTipoOperazione as varchar(2)) + '-' + Cast(CodiceOperazioneEsterna as varchar(2)) as CodiceOperazione FROM TblDDTInviati WHERE (IDDDT IS NULL) AND (CodiceFornitore = @CODICEFORNITORE) ORDER BY FlagSelezionato DESC, TblDDTInviati .DataBollaCliente desc, ID DESC" UpdateCommand="Update Facon.dbo.TblDDTInviati set QT = 0 where ID = 0">
             <SelectParameters>
                 <asp:SessionParameter Name="CODICEFORNITORE" SessionField="Code" />
             </SelectParameters>
@@ -233,7 +247,7 @@
             <asp:Timer ID="Timer1" runat="server" Enabled="False" Interval="10000">
         </asp:Timer>
             <br />
-        
+
    </div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -253,7 +267,7 @@
         $('[id*=Data]').datepicker({
             changeMonth: true,
             changeYear: true,
-            format: "dd-mm-yyyy",
+            format: "dd/mm/yyyy",
             language: "it-IT",
             autoclose: true,
             weekStart: 1,
@@ -298,5 +312,112 @@
           
         </script>
 
+         
+        <script type="text/javascript">
+            function filter2(phrase, _id) {
+                var words = phrase.value.toLowerCase().split(" ");
+                var table = document.getElementById(_id);
+                var ele;
+                for (var r = 1; r < table.rows.length; r++) {
+                    ele = table.rows[r].innerHTML.replace(/<[^>]+>/g, "");
+                    var displayStyle = 'none';
+                    for (var i = 0; i < words.length; i++) {
+                        if (ele.toLowerCase().indexOf(words[i]) >= 0)
+                            displayStyle = '';
+                        else {
+                            displayStyle = 'none';
+                            break;
+                        }
+                    }
+                    table.rows[r].style.display = displayStyle;
+                }
+            }
+        </script>
     </div>
+    <style>
+             .pagination-ys {
+    /*display: inline-block;*/
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+    .pagination-ys table > tbody > tr > td {
+        display: inline;
+    }
+
+        .pagination-ys table > tbody > tr > td > a,
+        .pagination-ys table > tbody > tr > td > span {
+            position: relative;
+            float: left;
+            padding: 8px 12px;
+            line-height: 1.42857143;
+            text-decoration: none;
+            color: dimgray;
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            margin-left: -1px;
+        }
+
+        .pagination-ys table > tbody > tr > td > span {
+            position: relative;
+            float: left;
+            padding: 8px 12px;
+            line-height: 1.42857143;
+            text-decoration: none;
+            margin-left: -1px;
+            z-index: 2;
+            color: #aea79f;
+            background-color: #f5f5f5;
+            border-color: #dddddd;
+            cursor: default;
+        }
+
+        .pagination-ys table > tbody > tr > td:first-child > a,
+        .pagination-ys table > tbody > tr > td:first-child > span {
+            margin-left: 0;
+            border-bottom-left-radius: 4px;
+            border-top-left-radius: 4px;
+        }
+
+        .pagination-ys table > tbody > tr > td:last-child > a,
+        .pagination-ys table > tbody > tr > td:last-child > span {
+            border-bottom-right-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+
+        .pagination-ys table > tbody > tr > td > a:hover,
+        .pagination-ys table > tbody > tr > td > span:hover,
+        .pagination-ys table > tbody > tr > td > a:focus,
+        .pagination-ys table > tbody > tr > td > span:focus {
+            color: #97310e;
+            background-color: #eeeeee;
+            border-color: #dddddd;
+        }
+
+         </style>
+
+         <style>
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: gray;
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+  border-radius: 5px;
+}
+</style>
 </asp:Content>

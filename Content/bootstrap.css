@@ -118,8 +118,9 @@ optgroup,
 select,
 textarea {
   color: inherit;
-  font: inherit;
-  margin: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
 }
 button {
   overflow: visible;
@@ -1095,6 +1096,7 @@ textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+    width: 145px;
 }
 a {
   color: #337ab7;
@@ -1671,6 +1673,8 @@ pre code {
   min-height: 1px;
   padding-right: 15px;
   padding-left: 15px;
+    top: 10px;
+    left: 0px;
 }
 .col-xs-1,
 .col-xs-2,
@@ -3101,7 +3105,6 @@ select[multiple].input-lg {
 }
 .btn {
   display: inline-block;
-  margin-bottom: 0;
   font-weight: normal;
   text-align: center;
   white-space: nowrap;

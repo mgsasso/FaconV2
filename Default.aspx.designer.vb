@@ -50,6 +50,15 @@ Partial Public Class _Default
     Protected WithEvents AspettoBeni As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
+    '''Controllo TrasportoACura.
+    '''</summary>
+    '''<remarks>
+    '''Campo generato automaticamente.
+    '''Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+    '''</remarks>
+    Protected WithEvents TrasportoACura As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
     '''Controllo NumeroColli.
     '''</summary>
     '''<remarks>
@@ -104,6 +113,15 @@ Partial Public Class _Default
     Protected WithEvents SearchTxt As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Controllo HplUrlPdf.
+    '''</summary>
+    '''<remarks>
+    '''Campo generato automaticamente.
+    '''Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+    '''</remarks>
+    Protected WithEvents HplUrlPdf As Global.System.Web.UI.WebControls.HyperLink
+
+    '''<summary>
     '''Controllo Selezionati.
     '''</summary>
     '''<remarks>
@@ -111,6 +129,24 @@ Partial Public Class _Default
     '''Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
     '''</remarks>
     Protected WithEvents Selezionati As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Controllo BtnOn.
+    '''</summary>
+    '''<remarks>
+    '''Campo generato automaticamente.
+    '''Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+    '''</remarks>
+    Protected WithEvents BtnOn As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Controllo BtnOff.
+    '''</summary>
+    '''<remarks>
+    '''Campo generato automaticamente.
+    '''Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+    '''</remarks>
+    Protected WithEvents BtnOff As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Controllo GridView1.
